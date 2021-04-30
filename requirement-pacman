@@ -1,0 +1,4 @@
+sudo pacman -S \
+python-editdistance \
+python-lmdb \
+python-shapely \
