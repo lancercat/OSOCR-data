@@ -1,0 +1,58 @@
+All datasets used for openset recognition includes:
+
+ART, CTW HWDB LSVT MLT and RCTW
+
+To perform the openset single character experiments, you need 
+    -the ctw folder for the scene character recognition task
+    -the hwdb folder for the scene character recognition task
+
+To perform CHS-JAP cross language openset recognition, you need
+    -All the following except the hwdb folder.
+    
+So, to generate one or more datasets used, you need to download the datasets to a folder.
+
+
+After downloading, the data folder shall look like:
+##################################################################################
+$ ls -R
+.:
+art  ctw  filestructure.txt  hwdb  lsvt  mlt  rctw_train
+
+./art:
+train_images.tar.gz  train_labels.json  train_task2_images.tar.gz  train_task2_labels.json
+
+./ctw:
+ctw-annotations.tar.gz  jpgs
+
+./ctw/jpgs:
+
+./hwdb:
+Gnt1.0Test.zip        Gnt1.0TrainPart2.zip  Gnt1.1Test.zip        Gnt1.1TrainPart2.zip  Gnt1.2TrainPart1.zip
+Gnt1.0TrainPart1.zip  Gnt1.0TrainPart3.zip  Gnt1.1TrainPart1.zip  Gnt1.2Test.zip        Gnt1.2TrainPart2.zip
+
+./lsvt:
+train_full_images_0.tar.gz  train_full_images_1.tar.gz  train_full_labels.json
+
+./mlt:
+Chinese_gt.zip  Chinese.zip  ImagesPart1.zip  ImagesPart2.zip
+
+./rctw_train:
+part1.zip  part2.zip  part3.zip  part4.zip  part5.zip  part6.zip
+################################
+Note that we assume you already uncompressed the images in the ctw dataset into the ./ctw/jpg folder. 
+    The 26 tarballs have really weird and long random names due to wget and onedrive quirks, 
+    so we will not include it in 
+        the file structure and 
+        the provided uncompressing scripts
+To sum up, just make sure you have 25,887 images uncompressed into the ./ctw/jpg folder
+before you start the following steps
+###################################################################################
+
+Now use the bash script to uncompress the datasets:
+
+
+Finally, use the corresponding python scripts to generate lmdbs for a specific task.
+
+
+As the dataset building code is very space consuming, It's recommended to have more than 500GiB disk space for it. 
+

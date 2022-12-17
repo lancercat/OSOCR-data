@@ -1,0 +1,24 @@
+# Some datasets may require registering or filling in application forms 
+and may have copyright limitation for specific applications. Play fair!
+
+MLT19
+https://rrc.cvc.uab.es/?ch=15&com=downloads
+
+RCTW
+https://rctw.vlrlab.net/dataset/
+
+LSVT
+https://rrc.cvc.uab.es/?ch=16&com=downloads
+
+ART
+https://rrc.cvc.uab.es/?ch=14&com=downloads
+
+HWDB
+http://www.nlpr.ia.ac.cn/databases/handwriting/Home.html
+http://www.nlpr.ia.ac.cn/databases/handwriting/Download.html
+
+CTW 
+https://ctwdataset.github.io/
+# Actually you can find this by googling, so LMGFY....
+https://onedrive.live.com/?authkey=%21AGB7y%5F2e%5Fpd20Tk&id=90370BDE439CA25F%2119394&cid=90370BDE439CA25F
+
