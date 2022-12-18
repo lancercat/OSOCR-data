@@ -187,10 +187,10 @@ class neko_osocr_datamaker:
         os.makedirs(this.paths["dict_root"],exist_ok=True);
         #
 
-        # this.make_chlat_training();
-        # this.make_jap();
-        # this.make_kr();
-        # this.make_hn();
+        this.make_chlat_training();
+        this.make_jap();
+        this.make_kr();
+        this.make_hn();
         this.make_bear_lang();
 
     # removing all vertical clips in training set and clips with unseen characters.
