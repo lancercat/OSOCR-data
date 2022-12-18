@@ -2,7 +2,7 @@ import torch
 import glob
 import os
 from neko_sdk.ocr_modules.fontkit.fntmgmt import fntmgmt;
-from neko_2020nocr.tasks.dscsg2 import upgrade_pt
+from osocr_tasks.tasksg1.dscsg2 import upgrade_pt
 def index_fnts(fnts):
     odict={};
     pdict={};

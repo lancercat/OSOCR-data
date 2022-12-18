@@ -3,6 +3,11 @@ echo $1
 #SRC=$2
 DST=/run/media/lasercat/writebuffer/deploy/
 SRC=/run/media/lasercat/projects_001/OSOCR-data/
+CAC=/run/media/lasercat/writebuffer/cachededlmdbs/
+EXP=/run/media/lasercat/cache2/
+
+CODE_ROOT=${PWD}/code
+
 
 #
 cd ${SRC}/art
@@ -82,5 +87,9 @@ done;
 
 unzip competition-gnt.zip -d ${DST}/hwdb/comp
 
+cp -r ${SRC}/fonts ${DST}/
 
+cd ${CODE_ROOT}
+
+export PYTHONPATH=${CODE_ROOT}
 

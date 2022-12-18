@@ -1,12 +1,8 @@
-from neko_2020nocr.tasks.taskmaker import build_training_dataset_by_label,build_testing_dataset_by_label,split_labelset;
-from neko_2020nocr.tasks.dscs import scanfolder_and_add_pt;
-from neko_2020nocr.tasks.ctw_fslchr.split import ctwshuflist
+from osocr_tasks.tasksg1.taskmaker import build_training_dataset_by_label,build_testing_dataset_by_label,split_labelset;
+from osocr_tasks.tasksg1.dscs import scanfolder_and_add_pt;
+from osocr_tasks.tasksg1.ctw_fslchr.split import ctwshuflist
 
 from neko_sdk.ocr_modules.lmdbcvt.ctwchcvt import make_ctwch
-
-
-import os
-import torch;
 
 
 def splitctwfsl_tr(srcdb,dstroot,train_cnt,name,evalcnt=500,valcnt=100):

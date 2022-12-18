@@ -1,24 +1,23 @@
 from neko_sdk.ocr_modules.lmdbcvt.mltlike import make_mlt_valhindi,\
     make_mlt_valkr,make_mlt_train_kr,make_mlt_train_bangla,\
     make_mlt_train_chlat,make_mlt_valjp
-from neko_2020nocr.tasks.ch_jap_osocr.dictchslatkrMCmetafy import make_chlatkr_mc_dict
-from neko_2020nocr.tasks.ch_jap_osocr.dict3817MCmetafy import make_chlat_mc_dict
-from neko_2020nocr.tasks.ch_jap_osocr.dict3817SCmetafy import make_chlat_sc_dict
-from neko_2020nocr.tasks.ch_jap_osocr.dict3817WTmetafy import make_chlat_wt_dict
+from osocr_tasks.tasksg1.ch_jap_osocr.dictchslatkrMCmetafy import make_chlatkr_mc_dict
+from osocr_tasks.tasksg1.ch_jap_osocr.dict3817SCmetafy import make_chlat_sc_dict
+from osocr_tasks.tasksg1.ch_jap_osocr.dict3817WTmetafy import make_chlat_wt_dict
 
 
-from neko_sdk.ocr_modules.lmdbcvt.artcvt import make_art_lmdb,make_art_lmdb_wval
+from neko_sdk.ocr_modules.lmdbcvt.artcvt import make_art_lmdb
 from neko_sdk.ocr_modules.lmdbcvt.ctwcvt import make_ctw
 from neko_sdk.ocr_modules.lmdbcvt.lsvtcvt import makelsvt
 from neko_sdk.ocr_modules.lmdbcvt.mltlike import make_rctw_train # well thay look alike :-)
 
-from neko_2020nocr.tasks.dscs import makept
+from osocr_tasks.tasksg1.dscs import makept
 from neko_sdk.ocr_modules.charset.etc_cset import latin62,korean
 from neko_sdk.ocr_modules.charset.symbols import symbol;
 from neko_sdk.ocr_modules.charset.chs_cset import t1_3755
 
 from neko_sdk.lmdb_wrappers.splitds import shfilter,harvast_cs
-from neko_2020nocr.tasks.dscs import get_ds;
+from osocr_tasks.tasksg1.dscs import get_ds;
 
 import os
 

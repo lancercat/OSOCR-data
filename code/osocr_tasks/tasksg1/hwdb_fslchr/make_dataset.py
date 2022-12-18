@@ -1,10 +1,10 @@
 
-from neko_2020nocr.tasks.taskmaker import build_training_dataset_by_label,build_testing_dataset_by_label,split_labelset;
+from osocr_tasks.tasksg1.taskmaker import build_training_dataset_by_label,build_testing_dataset_by_label,split_labelset;
 from neko_sdk.ocr_modules.lmdbcvt.hwdbcvt import make_hwdb
-from neko_2020nocr.tasks.dscs import scanfolder_and_add_pt
-from neko_2020nocr.tasks.hwdb_fslchr.split import t1shuflist
+from osocr_tasks.tasksg1.dscs import scanfolder_and_add_pt
+from osocr_tasks.tasksg1.hwdb_fslchr.split import t1shuflist
 import os
-import torch
+
 
 def splithwdbtr(trfulldbdst,tefulldbdst,name,
                 dstroot,train_cnt,evalcnt,valcnt):

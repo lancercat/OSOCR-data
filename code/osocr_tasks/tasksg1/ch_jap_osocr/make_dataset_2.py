@@ -4,24 +4,24 @@ from neko_sdk.ocr_modules.lmdbcvt.mltlike import \
     make_mlt_train_Korea,make_mlt_train_Hindi,\
     make_mlt_train_chlat,make_mlt_train_jp,\
     make_mlt_train_bangla,make_mlt_train_Arabic
-from neko_2020nocr.tasks.ch_jap_osocr.dictchslatkrMCmetafy import make_chlatkr_mc_dict
-from neko_2020nocr.tasks.ch_jap_osocr.dict3817MCmetafy import make_chlat_mc_dict
-from neko_2020nocr.tasks.ch_jap_osocr.dict3817SCmetafy import make_chlat_sc_dict
-from neko_2020nocr.tasks.ch_jap_osocr.dict3817WTmetafy import make_chlat_wt_dict
+from osocr_tasks.tasksg1.ch_jap_osocr.dictchslatkrMCmetafy import make_chlatkr_mc_dict
+from osocr_tasks.tasksg1.ch_jap_osocr.dict3817MCmetafy import make_chlat_mc_dict
+from osocr_tasks.tasksg1.ch_jap_osocr.dict3817SCmetafy import make_chlat_sc_dict
+from osocr_tasks.tasksg1.ch_jap_osocr.dict3817WTmetafy import make_chlat_wt_dict
 
 
-from neko_sdk.ocr_modules.lmdbcvt.artcvt import make_art_lmdb,make_art_lmdb_wval
+from neko_sdk.ocr_modules.lmdbcvt.artcvt import make_art_lmdb
 from neko_sdk.ocr_modules.lmdbcvt.ctwcvt import make_ctw
 from neko_sdk.ocr_modules.lmdbcvt.lsvtcvt import makelsvt
 from neko_sdk.ocr_modules.lmdbcvt.mltlike import make_rctw_train # well thay look alike :-)
 
-from neko_2020nocr.tasks.dscs import makept
+from osocr_tasks.tasksg1.dscs import makept
 from neko_sdk.ocr_modules.charset.etc_cset import latin62,korean
 from neko_sdk.ocr_modules.charset.symbols import symbol;
 from neko_sdk.ocr_modules.charset.chs_cset import t1_3755
 
 from neko_sdk.lmdb_wrappers.splitds import shfilter,harvast_cs
-from neko_2020nocr.tasks.dscs import get_ds;
+from osocr_tasks.tasksg1.dscs import get_ds;
 
 
 
@@ -38,12 +38,13 @@ class neko_osocr_datamaker:
             "rctwtrroot": sroot+"/rctw_train/train",
             "lsvttrjson":sroot+"/lsvt/train_full_labels.json",
             "lsvttrimgs":sroot+"/lsvt/imgs/",
-            "dictroot": droot+"dicts",
+            "dict_root": droot+"dicts",
             "desroot":droot,
             "cacheroot":croot,
-            "fntpath": [droot + "fonts/NotoSansCJK-Regular.ttc"],
-            "bafntpath":[droot + "fonts/NotoSansBengali-Regular.ttf"],
-            "hndfnt":[droot + "fonts/NotoSansDevanagari-Regular.ttf"]
+            "fntpath": [sroot + "fonts/NotoSansCJK-Regular.ttc"],
+            "bafntpath":[sroot + "fonts/NotoSansBengali-Regular.ttf"],
+            "hndfnt":[sroot + "fonts/NotoSansDevanagari-Regular.ttf"],
+            "arfntpath":[sroot + "fonts/NotoSansArabic-Regular.ttf"]
         }
 
     def make_kr(this):
@@ -55,12 +56,12 @@ class neko_osocr_datamaker:
         shfilter(rawmltkr, latin62.union(t1_3755).union(korean), hkreval);
         makept(hkreval,
                this.paths["fntpath"],
-               os.path.join(this.paths["dictroot"], "dabkrmlt.pt"),
+               os.path.join(this.paths["dict_root"], "dabkrmlt.pt"),
                latin62,
                symbol.union(t1_3755)
                );
         # If you want to train model with KR.... But this another protocol.
-        trdskrpath=os.path.join(this.paths["dictroot"], "dabclkMC.pt");
+        trdskrpath=os.path.join(this.paths["dict_root"], "dabclkMC.pt");
         make_chlatkr_mc_dict(this.paths["fntpath"],
                              trdskrpath);
         pass;
@@ -75,7 +76,7 @@ class neko_osocr_datamaker:
 
         makept(hevalh,
                this.paths["hndfnt"],
-               os.path.join(this.paths["dictroot"], "dabhnmlt.pt"),
+               os.path.join(this.paths["dict_root"], "dabhnmlt.pt"),
                latin62,
                symbol.union(korean)
                )
@@ -83,10 +84,8 @@ class neko_osocr_datamaker:
     def make_bear_lang(this): # kuma kuma kuma bear (x
         # Bengali
         rawbangla = os.path.join(this.paths["cacheroot"], "mlttrbengala");
-        # sbe = os.path.join(this.paths["desroot"], "mltbedb_seen");
         hevalb=os.path.join(this.paths["desroot"], "mlttrbe_hori")
 
-        trdsbapath=os.path.join(this.paths["dictroot"], "dabclbaMC.pt")
         make_mlt_train_bangla(this.paths["mltroot"],rawbangla);
         bcs = harvast_cs(rawbangla);
         bcs=bcs.difference(symbol);
@@ -95,14 +94,14 @@ class neko_osocr_datamaker:
         # Arab
         rawarab = os.path.join(this.paths["cacheroot"], "mlttrarab");
         hevalar = os.path.join(this.paths["desroot"], "mltardb_hori");
-        make_mlt_train_Arabic(this.paths["fntpath"],rawarab);
+        make_mlt_train_Arabic(this.paths["mltroot"],rawarab);
         bcs = harvast_cs(rawarab);
         bcs=bcs.difference(symbol);
-        shfilter(rawbangla,bcs,hevalar);
+        shfilter(rawarab,bcs,hevalar);
 
-        makept(rawbangla,
-               this.paths["bafntpath"],
-               os.path.join(this.paths["dictroot"], "dabbemlt.pt"),
+        makept(rawarab,
+               this.paths["arfntpath"],
+               os.path.join(this.paths["dict_root"], "dabbemlt.pt"),
                latin62,
                symbol.union(korean)
                )
@@ -121,7 +120,7 @@ class neko_osocr_datamaker:
 
         makept(heval,
                this.paths["fntpath"],
-               os.path.join(this.paths["dictroot"], "dabjpmlt.pt"),
+               os.path.join(this.paths["dict_root"], "dabjpmlt.pt"),
                latin62,
                symbol.union(korean) # To black list symbols and korean.
                )
@@ -167,11 +166,11 @@ class neko_osocr_datamaker:
             shfilter(s, latin62.union(t1_3755), d);
 
         # Label transductive
-        make_chlat_wt_dict(this.paths["fntpath"], (this.paths["dict_root"], "dab3791WT.pt"));
+        make_chlat_wt_dict(this.paths["fntpath"], os.path.join(this.paths["dict_root"], "dab3791WT.pt"));
 
         # Inductive
-        make_chlat_sc_dict(this.paths["fntpath"],(this.paths["dict_root"],"dab3791SC.pt"));
-        make_chlat_mc_dict(this.paths["fntpath"], (this.paths["dict_root"],"dab3791MC.pt"));
+        make_chlat_sc_dict(this.paths["fntpath"],os.path.join(this.paths["dict_root"],"dab3791SC.pt"));
+        make_chlat_mc_dict(this.paths["fntpath"], os.path.join(this.paths["dict_root"],"dab3791MC.pt"));
 
         # For OSOCR and VSDF, we used transductive setup, but the performance will not drop if you opt to the inductive setup
         # The models are not utilizing the extra information in a beneficial way.
@@ -185,13 +184,13 @@ class neko_osocr_datamaker:
         # #the mlt annotation is a little bit messy, some korean scripts are mixed in
         #
 
-        os.makedirs(this.paths["dictroot"],exist_ok=True);
+        os.makedirs(this.paths["dict_root"],exist_ok=True);
         #
 
-        this.make_chlat_training();
-        this.make_jap();
-        this.make_kr();
-        this.make_hn();
+        # this.make_chlat_training();
+        # this.make_jap();
+        # this.make_kr();
+        # this.make_hn();
         this.make_bear_lang();
 
     # removing all vertical clips in training set and clips with unseen characters.
@@ -204,6 +203,6 @@ if __name__ == '__main__':
         DROOT = sys.argv[3]
     else:
         SROOT = "/run/media/lasercat/writebuffer/deploy/"
-        DROOT = "/run/media/lasercat/writebuffer/deployedlmdbs/"
+        DROOT = "/run/media/lasercat/cache2/"
         CROOT="/run/media/lasercat/writebuffer/cachededlmdbs/"
     neko_osocr_datamaker(SROOT,CROOT,DROOT).make_all();
