@@ -203,6 +203,6 @@ if __name__ == '__main__':
         DROOT = sys.argv[3]
     else:
         SROOT = "/run/media/lasercat/writebuffer/deploy/"
-        DROOT = "/run/media/lasercat/cache2/"
-        CROOT="/run/media/lasercat/writebuffer/cachededlmdbs/"
+        CROOT = "/run/media/lasercat/cache2/"
+        DROOT="/run/media/lasercat/writebuffer/cachededlmdbs/"
     neko_osocr_datamaker(SROOT,CROOT,DROOT).make_all();

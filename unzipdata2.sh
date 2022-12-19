@@ -1,9 +1,16 @@
 echo $1
 #DST=$1
 #SRC=$2
-DST=/run/media/lasercat/writebuffer/deploy/
+# data downloaded
 SRC=/run/media/lasercat/projects_001/OSOCR-data/
+
+# cache dir 1 (100GiB~)
+DST=/run/media/lasercat/writebuffer/deploy/
+
+# cache dir 2 (GiB~)
 CAC=/run/media/lasercat/writebuffer/cachededlmdbs/
+
+# generated dataset dir (GiB~)
 EXP=/run/media/lasercat/cache2/
 
 CODE_ROOT=${PWD}/code
@@ -87,9 +94,10 @@ done;
 
 unzip competition-gnt.zip -d ${DST}/hwdb/comp
 
-cp -r ${SRC}/fonts ${DST}/
+cp -r ${CODE_ROOT}/../fonts ${DST}/
 
 cd ${CODE_ROOT}
 
 export PYTHONPATH=${CODE_ROOT}
 
+python osocr_tasks/tasksg1/ch_jap_osocr/make_dataset_2.py ${DST} ${CAC} ${EXP}
