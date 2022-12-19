@@ -22,3 +22,10 @@ Cat. 15-12-2022
 
 --------
 
+OSTR scripts are mostly there...
+
+The cat is currently occupied by some writting assignments, so there won't be updates in a few days.
+
+From the current process, we are likely to finalize this by Xmeows.
+
+Cat. 19-12-2022
