@@ -101,3 +101,6 @@ cd ${CODE_ROOT}
 export PYTHONPATH=${CODE_ROOT}
 
 python osocr_tasks/tasksg1/ch_jap_osocr/make_dataset_2.py ${DST} ${CAC} ${EXP}
+python osocr_tasks/tasksg1/hwdb_fslchr/make_dataset.py ${DST} ${CAC} ${EXP}
+python osocr_tasks/tasksg1/ctw_fslchr/make_dataset.py ${DST} ${CAC} ${EXP}
+python osocr_tasks/tasksg1/char_rej.py ${EXP}

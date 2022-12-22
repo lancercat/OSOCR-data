@@ -1,3 +1,5 @@
+import sys
+
 from osocr_tasks.tasksg1.taskmaker import build_training_dataset_by_label,build_testing_dataset_by_label,split_labelset;
 from osocr_tasks.tasksg1.dscs import scanfolder_and_add_pt;
 from osocr_tasks.tasksg1.ctw_fslchr.split import ctwshuflist
@@ -24,14 +26,19 @@ def buildctws(src,droot,fntpath):
 
 
 if __name__ == '__main__':
-    ROOT="/run/media/lasercat/writebuffer/deploy/"
-    CROOT = "/run/media/lasercat/writebuffer/cachededlmdbs/"
-    DROOT = "/run/media/lasercat/cache2/"
+    if (len(sys.argv)>1):
+        ROOT = sys.argv[1];
+        CROOT = sys.argv[2];
+        DROOT = sys.argv[3];
+    else:
+        ROOT="/run/media/lasercat/writebuffer/deploy/"
+        CROOT = "/run/media/lasercat/writebuffer/cachededlmdbs/"
+        DROOT = "/run/media/lasercat/cache2/"
     trgtpath = ROOT+"ctw/gtar/train.jsonl";
     trjpgpath = ROOT+"ctw/itar";
     chfulldbdst = CROOT+"ctwch";
     fsltsks=DROOT+"ctwch";
     fntpath=ROOT+"fonts/NotoSansCJK-Regular.ttc"
-    # make_ctwch(trgtpath, trjpgpath,chfulldbdst);
-    # buildctws(chfulldbdst, fsltsks,fntpath);
+    make_ctwch(trgtpath, trjpgpath,chfulldbdst);
+    buildctws(chfulldbdst, fsltsks,fntpath);
     scanfolder_and_add_pt(fsltsks,[fntpath],set(),set());

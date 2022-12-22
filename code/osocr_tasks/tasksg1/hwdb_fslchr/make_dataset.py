@@ -44,9 +44,15 @@ def buildhwdb(trfulldb,tefulldb,compdb,droot):
 # and as you can see, the validation set and evaluation set are always the same
 # so we manually removed redundant
 if __name__ == '__main__':
-    ROOT="/run/media/lasercat/writebuffer/deploy/"
-    CROOT = "/run/media/lasercat/writebuffer/cachededlmdbs/"
-    DROOT = "/run/media/lasercat/cache2/"
+    if (len(sys.argv)>1):
+        ROOT = sys.argv[1];
+        CROOT = sys.argv[2];
+        DROOT = sys.argv[3];
+    else:
+        ROOT="/run/media/lasercat/writebuffer/deploy/"
+        CROOT = "/run/media/lasercat/writebuffer/cachededlmdbs/"
+        DROOT = "/run/media/lasercat/cache2/"
+
     trgnt=ROOT+"hwdb/train/"
     tegnt=ROOT+"hwdb/test/"
     i13gnt=ROOT+"hwdb/comp/"
@@ -61,4 +67,4 @@ if __name__ == '__main__':
     make_hwdb(i13gnt, i13fulldbdst);
     os.makedirs(fsltsks, exist_ok=True);
     buildhwdb(trfulldbdst,tefulldbdst,i13fulldbdst,fsltsks);
-    scanfolder_and_add_pt(fsltsks,fnts,set(),set())
+    scanfolder_and_add_pt(fsltsks,fnts,set(),set());

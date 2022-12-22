@@ -24,11 +24,12 @@ def buildrej(srcpt,dstpt,k=400):
 if __name__ == '__main__':
     import sys
     if(len(sys.argv)>1):
-        HWDB_ROOT = sys.argv[1];
-        CTW_ROOT = sys.argv[2];
+        DROOT = sys.argv[1];
     else:
-        HWDB_ROOT="/run/media/lasercat/cache2/HWDB/pami_ch_fsl_hwdb/hwdbfsl_10_1/cuwu_evalhwdbfsl_10_1/";
-        CTW_ROOT="/run/media/lasercat/cache2/ctwch/ctwfsl_5_1eval/";
+        DROOT= "/run/media/lasercat/cache2/"
+
+    HWDB_ROOT = DROOT+"/HWDB/pami_ch_fsl_hwdb/hwdbfsl_10_1/cuwu_evalhwdbfsl_10_1/";
+    CTW_ROOT = DROOT+"/run/media/lasercat/cache2/ctwch/ctwfsl_5_1eval/";
 
     # buildrej(HWDB_ROOT+"dict.pt",HWDB_ROOT+"dictrej.pt");
     buildrej(HWDB_ROOT+"dict.pt",
