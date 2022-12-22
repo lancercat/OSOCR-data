@@ -44,18 +44,21 @@ def buildhwdb(trfulldb,tefulldb,compdb,droot):
 # and as you can see, the validation set and evaluation set are always the same
 # so we manually removed redundant
 if __name__ == '__main__':
-    ROOT="/media/lasercat/backup/"
-    trgnt=ROOT+"deploy/hwdb/train/"
-    tegnt=ROOT+"deploy/hwdb/test/"
-    i13gnt=ROOT+"deploy/hwdb/comp/"
+    ROOT="/run/media/lasercat/writebuffer/deploy/"
+    CROOT = "/run/media/lasercat/writebuffer/cachededlmdbs/"
+    DROOT = "/run/media/lasercat/cache2/"
+    trgnt=ROOT+"hwdb/train/"
+    tegnt=ROOT+"hwdb/test/"
+    i13gnt=ROOT+"hwdb/comp/"
 
-    trfulldbdst = ROOT+"deployedlmdbs/HWDB/hwdbtr";
-    tefulldbdst = ROOT+"deployedlmdbs/HWDB/hwdbte";
-    i13fulldbdst= ROOT+"deployedlmdbs/HWDB/hwdbco"
-    fsltsks=ROOT+"deployedlmdbs/HWDB/pami_ch_fsl_hwdb";
-    fnts=[ROOT+"deploy/NotoSansCJK-Regular.ttc"]
+    trfulldbdst = CROOT+"HWDB/hwdbtr";
+    tefulldbdst = CROOT+"HWDB/hwdbte";
+    i13fulldbdst= CROOT+"HWDB/hwdbco"
+    fsltsks=DROOT+"HWDB/pami_ch_fsl_hwdb";
+    fnts=[ROOT+"fonts/NotoSansCJK-Regular.ttc"]
     make_hwdb(trgnt, trfulldbdst);
     make_hwdb(tegnt, tefulldbdst);
     make_hwdb(i13gnt, i13fulldbdst);
+    os.makedirs(fsltsks, exist_ok=True);
     buildhwdb(trfulldbdst,tefulldbdst,i13fulldbdst,fsltsks);
     scanfolder_and_add_pt(fsltsks,fnts,set(),set())

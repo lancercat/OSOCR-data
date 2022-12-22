@@ -75,9 +75,9 @@ def handle_file(fdict,dataroot,db):
         # print(texts[b]);
         if(clip.shape[0]<5 or clip.shape[1]<=5):
             continue;
-        if((b+1)%39==0):
-            cv2.imshow("meow",clip);
-            cv2.waitKey(10);
+        # if((b+1)%39==0):
+        #     cv2.imshow("meow",clip);
+        #     cv2.waitKey(10);
         db.adddata_kv({"image":clip},{"label":texts[b],"lang":"Chinese","attr":str(attrs[b])},{});
 
 def make_ctwch(trpath,dataroot,dst):

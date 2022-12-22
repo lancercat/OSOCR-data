@@ -24,12 +24,14 @@ def buildctws(src,droot,fntpath):
 
 
 if __name__ == '__main__':
-    ROOT="/media/lasercat/backup"
-    trgtpath = ROOT+"/deploy/ctw/gtar/train.jsonl";
-    trjpgpath = ROOT+"/deploy/ctw/jpgs";
-    chfulldbdst = ROOT+"/deploy/ctwch";
-    fsltsks=ROOT+"/deployedlmdbs/ctwch";
-    fntpath=ROOT+"/deploy/NotoSansCJK-Regular.ttc"
-    make_ctwch(trgtpath, trjpgpath,chfulldbdst);
-    buildctws(chfulldbdst, fsltsks,fntpath);
+    ROOT="/run/media/lasercat/writebuffer/deploy/"
+    CROOT = "/run/media/lasercat/writebuffer/cachededlmdbs/"
+    DROOT = "/run/media/lasercat/cache2/"
+    trgtpath = ROOT+"ctw/gtar/train.jsonl";
+    trjpgpath = ROOT+"ctw/itar";
+    chfulldbdst = CROOT+"ctwch";
+    fsltsks=DROOT+"ctwch";
+    fntpath=ROOT+"fonts/NotoSansCJK-Regular.ttc"
+    # make_ctwch(trgtpath, trjpgpath,chfulldbdst);
+    # buildctws(chfulldbdst, fsltsks,fntpath);
     scanfolder_and_add_pt(fsltsks,[fntpath],set(),set());

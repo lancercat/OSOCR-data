@@ -13,7 +13,7 @@ from __future__ import unicode_literals
 from collections import defaultdict
 from PIL import Image, ImageDraw
 import numpy as np
-from neko_sdk.lmdbcvt import hwdb_sample_data
+from neko_sdk.ocr_modules.lmdbcvt import hwdb_sample_data
 import os;
 from struct import pack
 

@@ -52,7 +52,12 @@ def makept(dataset, font, protodst, xdst, blacklist, servants="QWERTYUIOPASDFGHJ
 
 from glob import glob
 import os
-def scanfolder_and_add_pt(root,font,xdst,blacklist):
-    dslist=glob(os.path.join(root,"*"));
+def scanfolder_and_add_pt(root,font,xdst,blacklist,depth=2):
+    d=os.path.join(root,"*");
+    dslist=[];
+    for i in range(depth):
+        dslist_d = glob(os.path.join(d,"*.mdb"));
+        d=os.path.join(d,"*");
+        dslist+=[os.path.dirname(i) for i in dslist_d]
     for data in dslist:
-        makept(data,font,os.path.join(data,"dict.pt"),xdst,blacklist);
+        makept(data,font,os.path.join(data,"dict.pt"),xdst,blacklist,servants="",masters="");
