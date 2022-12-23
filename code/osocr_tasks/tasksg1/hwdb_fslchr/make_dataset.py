@@ -44,6 +44,7 @@ def buildhwdb(trfulldb,tefulldb,compdb,droot):
 # and as you can see, the validation set and evaluation set are always the same
 # so we manually removed redundant
 if __name__ == '__main__':
+    import sys
     if (len(sys.argv)>1):
         ROOT = sys.argv[1];
         CROOT = sys.argv[2];
