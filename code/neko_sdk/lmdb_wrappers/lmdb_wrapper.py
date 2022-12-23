@@ -45,11 +45,13 @@ class lmdb_wrapper:
         try:
             this.txn.commit();
             this.db.close();
+            this.db=None;
         except:
             pass;
 
 
     def __del__(this):
-        this.end_this();
+        if(this.db is not None):
+            this.end_this();
 
 
