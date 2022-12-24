@@ -29,7 +29,7 @@ if __name__ == '__main__':
         DROOT= "/run/media/lasercat/cache2/"
 
     HWDB_ROOT = DROOT+"/HWDB/pami_ch_fsl_hwdb/hwdbfsl_10_1/cuwu_evalhwdbfsl_10_1/";
-    CTW_ROOT = DROOT+"/run/media/lasercat/cache2/ctwch/ctwfsl_5_1eval/";
+    CTW_ROOT = DROOT+"/ctwch/ctwfsl_5_1eval/";
 
     # buildrej(HWDB_ROOT+"dict.pt",HWDB_ROOT+"dictrej.pt");
     buildrej(HWDB_ROOT+"dict.pt",
