@@ -11,6 +11,15 @@ My suggestion is to buy a cheap used 240Gib SSD with 10~15 bucks, connect it thr
 
 
 ## Status
+Done updating!
+
+The datascripts and the documents are here. If you find bugs, feel free to open an issue or contact us.
+
+GLHF and Mewrry Xmeows.
+
+Cat. 24-Dec-2022
+
+---------------------------------------
 
 Most things are here, but we are still testing it, ironing quirks, and making documents. 
 
