@@ -8,7 +8,7 @@ from osocr_tasks.tasksg1.ch_jap_osocr.dictchslatkrMCmetafy import make_chlatkr_m
 from osocr_tasks.tasksg1.ch_jap_osocr.dict3817MCmetafy import make_chlat_mc_dict
 from osocr_tasks.tasksg1.ch_jap_osocr.dict3817SCmetafy import make_chlat_sc_dict
 from osocr_tasks.tasksg1.ch_jap_osocr.dict3817WTmetafy import make_chlat_wt_dict
-
+from osocr_tasks.tasksg1.ch_jap_osocr.make_ostr_dicts import make_all
 
 from neko_sdk.ocr_modules.lmdbcvt.artcvt import make_art_lmdb
 from neko_sdk.ocr_modules.lmdbcvt.ctwcvt import make_ctw
@@ -124,6 +124,7 @@ class neko_osocr_datamaker:
                latin62,
                symbol.union(korean) # To black list symbols and korean.
                )
+        make_all(this.paths["desroot"]);
 
 
     def make_chlat_training(this):
