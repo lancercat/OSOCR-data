@@ -1,6 +1,7 @@
 from neko_sdk.lmdb_wrappers.ocr_lmdb_reader import neko_ocr_lmdb_mgmt;
 from neko_sdk.ocr_modules.renderlite.lib_render import render_lite
 from neko_sdk.ocr_modules.renderlite.addfffh import refactor_meta,add_masters,finalize
+from neko_sdk.ocr_modules.fontkit.fntmgmt import fntmgmt;
 
 import torch;
 import regex
@@ -28,7 +29,9 @@ def get_ds(root,filter=True):
 # servants=["qf1","wf2",'qf2','wf1'];
 # masters="qwqw";
 
-def makept(dataset, font, protodst, xdst, blacklist, servants="QWERTYUIOPASDFGHJKLZXCVBNM", masters="qwertyuiopasdfghjklzxcvbnm", space=None):
+def makept(dataset, font, protodst, xdst, blacklist, servants="QWERTYUIOPASDFGHJKLZXCVBNM", masters="qwertyuiopasdfghjklzxcvbnm", space=None,autosel=True):
+    css = [fntmgmt.get_charset(F) for F in font];
+
     if(dataset is not None):
         if(space is not None):
             chrset=list(set(xdst.union(get_ds(dataset,False))).difference(blacklist).intersection(space));
@@ -37,7 +40,22 @@ def makept(dataset, font, protodst, xdst, blacklist, servants="QWERTYUIOPASDFGHJ
     else:
         chrset=list(set(xdst).difference(blacklist));
     engine = render_lite(os=84,fos=32);
-    font_ids=[0 for c in chrset];
+    if autosel:
+        font_ids = [];
+        for c in chrset:
+            fid = -1;
+            for fid_ in range(len(css)):
+                if (c in css[fid_]):
+                    fid = fid_;
+                    break;
+            if(fid==-1):
+                print("fail auto-find",c,"using fntid 0");
+                fid=0;
+            font_ids.append(fid);
+    else:
+        # for languages with more than one utfs in a character you can turn off auto sel to supress warnings.
+        font_ids = [0 for _ in chrset];
+
     meta=engine.render_core(chrset,['[s]'],font,font_ids,False);
     meta=refactor_meta(meta,unk=len(chrset)+len(['[s]']));
     # inject a shapeless UNK.

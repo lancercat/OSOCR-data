@@ -27,3 +27,28 @@ def prepare_pt(langroot):
            allch, {}, masters=masters, servants=servants);
 
     return dictp;
+
+def prepare_pt_wfallback(langroot,fntnames=["notofont.ttf"]):
+    dictp=os.path.join(langroot,"meta","dict.pt");
+    if(os.path.exists(dictp)):
+        print("skipping pt build, to force rebuilding, remove", dictp);
+        return dictp;
+
+    with open(os.path.join(langroot,"meta","alphabets.txt"))as fp:
+        chars=[l.strip() for l in fp];
+        allch=[];
+        masters=[];
+        servants=[];
+        for ch in chars:
+            if(len(ch)):
+                l= regex.findall(r'\X', ch, regex.U);
+                allch+=l;
+                for i in range(1,len(l)):
+                    masters.append(l[0]);
+                    servants.append(l[i]);
+    allch=list(set(allch));
+    makept(None, [os.path.join(langroot,"meta",fntname) for fntname in fntnames],
+           dictp,
+           allch, {}, masters=masters, servants=servants);
+
+    return dictp;
